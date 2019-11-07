@@ -41,12 +41,8 @@ headers = {
 networks = requests.request("GET", url, headers=headers).text
 
 for network_json in json.loads(networks):
-    if "Azure" in network_json["name"]:
-        continue
 
-    print(network_json["id"])
-    
-    print(alerts_main)
+    print(network_json["name"])
     
     time.sleep(0.2)
    
