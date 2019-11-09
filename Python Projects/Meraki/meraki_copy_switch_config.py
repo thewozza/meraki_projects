@@ -33,6 +33,9 @@ switchport_list = 0
 # we want to iterate over the config file one interface at a time
 # it is essentially a list of dicts so we'll go one list element at a time
 # which gives us one dict object to work with
+
+# the loop ends when switchport_list is the same length as the json config file
+# basically this means we've gone through the entire config and we're done
 while switchport_list < len(config_json):
     
     # remember how I said we'd have to add one?
@@ -47,10 +50,16 @@ while switchport_list < len(config_json):
     # first we create the API request URL
     # this will let us push the configuration for THIS ONE INTERFACE
     # seriously yes we have to do this one interface at a time
+    # here it is very important that we use the Meraki interface value
+    # because if we use the list value, we'll push the config to the wrong port
+    # so we use the variable switchport
     url = "https://api.meraki.com/api/v0/devices/"+serial+"/switchPorts/"+str(switchport)
 
     # then we set the header
     # we carefully insert the correct API key, yours not mine
+    # here it is very important that we use the Meraki interface value
+    # because if we use the list value, we'll push the config to the wrong port
+    # so we use the variable switchport
     headers = {
         'Accept': "*/*",
         'Content-Type': "application/json",
