@@ -41,7 +41,7 @@ while choice == 0:
             print("You selected the organization",data["name"])
             organization = data["id"]
 
-# then we build a nice little menu so you can selection the organization you want
+# the human readable vs CSV menu
 readable = 11
 while readable == 11:
     print ("Now you get to choose the output format!")
