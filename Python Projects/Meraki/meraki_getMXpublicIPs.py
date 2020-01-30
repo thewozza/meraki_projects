@@ -92,7 +92,10 @@ for mx_list in org_mx:
                 except KeyError:
                     pass
             else:
-                line.append(mx_uplinks["interface"])
+                try:
+                    line.append(mx_uplinks["interface"])
+                except KeyError:
+                    line.append("")
                 line.append("Not connected")
         else:
             if readable:
@@ -109,11 +112,11 @@ for mx_list in org_mx:
                 try:
                     line.append(mx_uplinks["interface"])
                 except KeyError:
-                    pass
+                    line.append("")
                 try:
                     line.append(mx_uplinks["status"])
                 except KeyError:
-                    pass
+                    line.append("")
             if readable:
                 try:
                     print("IP Address",mx_uplinks["ip"],end='')
@@ -129,30 +132,21 @@ for mx_list in org_mx:
                     pass
                 print()
             else:
-                try:
-                    line.append("IP Address")
-                except KeyError:
-                    pass
+                line.append("IP Address")
                 try:
                     line.append(mx_uplinks["ip"])
                 except KeyError:
-                    pass
-                try:
-                    line.append("Gateway IP")
-                except KeyError:
-                    pass
+                    line.append("")
+                line.append("Gateway IP")
                 try:
                     line.append(mx_uplinks["gateway"])
                 except KeyError:
-                    pass
-                try:
-                    line.append("DNS")
-                except KeyError:
-                    pass
+                    line.append("")
+                line.append("DNS")
                 try:
                     line.append(mx_uplinks["dns"])
                 except KeyError:
-                    pass
+                    line.append("")
             if mx_uplinks["usingStaticIp"]:
                 if readable:
                     print("Using Static IP")
