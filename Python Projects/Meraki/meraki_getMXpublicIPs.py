@@ -87,25 +87,72 @@ for mx_list in org_mx:
         # I could have coded error handling for that, but it is easier to just avoid it
         if mx_uplinks["status"] == "Not connected":
             if readable:
-                print(mx_uplinks["interface"],"Not connected")
+                try:
+                    print(mx_uplinks["interface"],"Not connected")
+                except KeyError:
+                    pass
             else:
                 line.append(mx_uplinks["interface"])
                 line.append("Not connected")
         else:
             if readable:
-                print(mx_uplinks["interface"],mx_uplinks["status"])
+                try:
+                    print(mx_uplinks["interface"],end='')
+                except KeyError:
+                    pass
+                try:
+                    print(mx_uplinks["status"],end='')
+                except KeyError:
+                    pass
+                print()
             else:
-                line.append(mx_uplinks["interface"])
-                line.append(mx_uplinks["status"])
+                try:
+                    line.append(mx_uplinks["interface"])
+                except KeyError:
+                    pass
+                try:
+                    line.append(mx_uplinks["status"])
+                except KeyError:
+                    pass
             if readable:
-                print("IP Address",mx_uplinks["ip"],"Gateway IP",mx_uplinks["gateway"],"DNS",mx_uplinks["dns"])
+                try:
+                    print("IP Address",mx_uplinks["ip"],end='')
+                except KeyError:
+                    pass
+                try:
+                    print("Gateway IP",mx_uplinks["gateway"],end='')
+                except KeyError:
+                    pass
+                try:
+                    print("DNS",mx_uplinks["dns"],end='')
+                except KeyError:
+                    pass
+                print()
             else:
-                line.append("IP Address")
-                line.append(mx_uplinks["ip"])
-                line.append("Gateway IP")
-                line.append(mx_uplinks["gateway"])
-                line.append("DNS")
-                line.append(mx_uplinks["dns"])
+                try:
+                    line.append("IP Address")
+                except KeyError:
+                    pass
+                try:
+                    line.append(mx_uplinks["ip"])
+                except KeyError:
+                    pass
+                try:
+                    line.append("Gateway IP")
+                except KeyError:
+                    pass
+                try:
+                    line.append(mx_uplinks["gateway"])
+                except KeyError:
+                    pass
+                try:
+                    line.append("DNS")
+                except KeyError:
+                    pass
+                try:
+                    line.append(mx_uplinks["dns"])
+                except KeyError:
+                    pass
             if mx_uplinks["usingStaticIp"]:
                 if readable:
                     print("Using Static IP")
