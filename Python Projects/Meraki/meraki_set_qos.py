@@ -17,8 +17,6 @@ VLANfile = sys.argv[3]
 DSCP = sys.argv[4]
 
 # first we create the API request URL
-# this will let us learn ALL the devices that are part of this particular network
-# and then we can iterate through them and set the physical shipping address
 url = "https://api.meraki.com/api/v0/networks/"+networkid+"/switch/settings/qosRules"
 
 # then we set the header
@@ -36,9 +34,7 @@ VLANlist = open(VLANfile,'r')
 # now we iterate through the list of devices in this network
 for VLAN in VLANlist:
     
-    # we only set the physical shipping address for devices that don't already have an adddress set
-    # I figure if someone has taken the time to set this, they probably know what they're doing
-    # that said you could remove this if statement and just overwrite what is there
+    # set the VLAN and DSCP code
     payload = "{\n  \"vlan\": "+VLAN+",\n  \"protocol\": \"Any\",\n  \"dscp\": "+DSCP+"\n}"
     
     print(url)
